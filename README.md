@@ -18,4 +18,3 @@ The repository includes three popular and effective controllers:
 - [MPC](https://en.wikipedia.org/wiki/Model_predictive_control)
 
 The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of systems of equations that govern physical systems. The gain of the system is extracted while taking into account physical constraints, resulting in a stable solution with minimal iterations. This demonstrates the power of mathematical optimization techniques and their practical application in the field of navigation and control systems.
-# Optimial-Controller
