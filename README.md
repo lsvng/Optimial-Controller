@@ -11,10 +11,10 @@ Control theory often relies on the use of block diagrams, a diagrammatic represe
 ====
 This project contains C++ examples on the implementation of advanced controllers, specifically designed for navigation applications. It leverages the principles of Control Law Theory to extract the system's control input. 
 
+The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of transfer functions that govern physical systems. The system's control input is calculated following the Control Law Theory, resulting in the system's stability.
+
 The repository includes three popular and effective controllers:
 
 - [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
 - [LQR Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator)
 - [MPC](https://en.wikipedia.org/wiki/Model_predictive_control)
-
-The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of transfer functions that govern physical systems. The system's control input is calculated following the Control Law Theory, resulting in the system's stability.
