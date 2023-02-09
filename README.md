@@ -9,7 +9,7 @@ Control theory often relies on the use of block diagrams, a diagrammatic represe
 
 **About**
 ====
-This project contains C++ examples on the implementation of advanced controllers, specifically designed for navigation applications. It leverages the principles of Control Law Theory to extract the gain of a system using complex mathematical formulas. 
+This project contains C++ examples on the implementation of advanced controllers, specifically designed for navigation applications. It leverages the principles of Control Law Theory to extract the system's control input. 
 
 The repository includes three popular and effective controllers:
 
@@ -17,4 +17,4 @@ The repository includes three popular and effective controllers:
 - [LQR Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator)
 - [MPC](https://en.wikipedia.org/wiki/Model_predictive_control)
 
-The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of systems of equations that govern physical systems. The gain of the system is extracted while taking into account physical constraints, resulting in a stable solution with minimal iterations. This demonstrates the power of mathematical optimization techniques and their practical application in the field of navigation and control systems.
+The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of transfer functions that govern physical systems. The system's control input is calculated following the Control Law Theory, resulting in the system's stability.
