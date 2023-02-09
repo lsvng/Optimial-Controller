@@ -3,15 +3,13 @@
 
 Control Law Theory is a branch of mathematics that focuses on the regulation of dynamic systems in engineered processes and machines. The goal is to create a model or algorithm that can apply inputs to the system to guide it towards a desired state, while reducing any negative impacts such as delay, overshoot, or steady-state error, and ensuring control stability.
 
-The Control Law Theory operates by using the difference between the actual and desired values of a process variable as feedback to generate a control action that brings the process variable closer to the set point. In addition, control theory also includes the study of controllability and observability. The applications of control theory has a significant impact on various industries, including manufacturing, aviation, communications, and robotics, by facilitating the design of automated systems that have revolutionized these fields.
+The Control Law Theory operates by using the difference between the actual and desired values of a process variable as feedback to generate a control action that brings the process variable closer to the set point. In addition, control theory also includes the study of [controllability](https://en.wikipedia.org/wiki/Controllability) and [observability](https://en.wikipedia.org/wiki/Observability). The applications of control theory has a significant impact on various industries, including manufacturing, aviation, communications, and robotics, by facilitating the design of automated systems that have revolutionized these fields.
 
 Control theory often relies on the use of block diagrams, a diagrammatic representation that simplifies the understanding of the transfer function. The transfer function is a mathematical representation of the relationship between the input and output of the system, and it is derived from the differential equations that describe the behavior of the system.
 
 **About**
 ====
-This project contains C++ examples on the implementation of advanced controllers, specifically designed for navigation applications. It leverages the principles of Control Law Theory to extract the system's control input. 
-
-The [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) plays a crucial role in this project by allowing for the creation of transfer functions that govern physical systems. The system's control input is calculated following the Control Law Theory, resulting in the system's stability.
+This project contains C++ examples on the implementation of advanced controllers, designed for navigation applications. It leverages the Control Law Theory to derive the system's control input, utilizing the [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) to construct transfer functions that govern the physical system.
 
 The repository includes three popular and effective controllers:
 
