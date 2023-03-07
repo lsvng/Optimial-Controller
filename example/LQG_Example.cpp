@@ -1,3 +1,22 @@
+/**
+ * @file LQR.cpp
+ * @brief !Valgrind output
+ * Memcheck, a memory error detector
+ * Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+ * Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+ * Command: ./OPTIMAL_CONTROLLER_LQG
+ * 
+ * 
+ * HEAP SUMMARY:
+ *     in use at exit: 0 bytes in 0 blocks
+ *   total heap usage: 108 allocs, 108 frees, 77,552 bytes allocated
+ * 
+ * All heap blocks were freed -- no leaks are possible
+ * 
+ * For lists of detected and suppressed errors, rerun with: -s
+ * ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ */
+
 #include <LQG.hpp>
 #include <memory>
 #include <Eigen/Dense>
