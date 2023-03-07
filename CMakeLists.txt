@@ -17,16 +17,23 @@ include_directories(
 )
 
 add_library(${PROJECT_NAME}_lib SHARED
-  source/StateSpaceModel.cpp
+  source/FuzzyLogic.cpp
   source/LQR.cpp
   source/LQG.cpp
   source/MPC.cpp
   source/PID.cpp
+  source/StateSpaceModel.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}_lib Eigen3::Eigen)
 
 # Excecutable
+add_executable(${PROJECT_NAME}_FuzzyLogic
+  example/FuzzyLogic_Example.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}_FuzzyLogic ${PROJECT_NAME}_lib)
+
 add_executable(${PROJECT_NAME}_LQR
   example/LQR_Example.cpp
 )
@@ -62,7 +69,7 @@ target_link_libraries(${PROJECT_NAME}_PID_Test
 )
 
 # Install.
-install(TARGETS ${PROJECT_NAME}_LQR ${PROJECT_NAME}_MPC ${PROJECT_NAME}_PID
+install(TARGETS ${PROJECT_NAME}_LQR ${PROJECT_NAME}_LQG ${PROJECT_NAME}_MPC ${PROJECT_NAME}_PID
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
