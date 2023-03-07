@@ -9,7 +9,7 @@ Control theory often relies on the use of block diagrams, a diagrammatic represe
 
 **About**
 ====
-This project contains C++ examples on the implementation of advanced controllers, designed for navigation applications. It leverages the Control Law Theory to generate a control action and uses the [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) to construct transfer functions that governs the system.
+This project includes C++ examples that demonstrate the implementation of advanced controllers. It utilizes Control Law Theory to generate control actions and leverages the [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) to construct transfer functions that govern the system and perform matrix operations.
 
 The repository includes five popular and effective controllers:
 
