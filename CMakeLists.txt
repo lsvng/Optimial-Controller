@@ -19,6 +19,7 @@ include_directories(
 add_library(${PROJECT_NAME}_lib SHARED
   source/StateSpaceModel.cpp
   source/LQR.cpp
+  source/LQG.cpp
   source/MPC.cpp
   source/PID.cpp
 )
@@ -31,6 +32,12 @@ add_executable(${PROJECT_NAME}_LQR
 )
 
 target_link_libraries(${PROJECT_NAME}_LQR ${PROJECT_NAME}_lib)
+
+add_executable(${PROJECT_NAME}_LQG
+  example/LQG_Example.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}_LQG ${PROJECT_NAME}_lib)
 
 add_executable(${PROJECT_NAME}_MPC
   example/MPC_Example.cpp
