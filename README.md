@@ -15,4 +15,5 @@ The repository includes three popular and effective controllers:
 
 - [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
 - [LQR Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator)
+- [LQG Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic%E2%80%93Gaussian_control)
 - [MPC](https://en.wikipedia.org/wiki/Model_predictive_control)
