@@ -26,19 +26,20 @@ LQR::~LQR()
 
 Eigen::MatrixXd LQR::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E)
 {
-  if (!statespace->isControllable(A, B))
+  if (!statespace->isControllable(A, B) || !statespace->isObservable(A, C))
   {
-    printf("LQR::LQR State-Space model is NOT controllable.\n");
+    printf("LQR::getControlInput State-Space model is NOT reliable.\n");
+    return controlInput.setZero(1, A.cols());
   }
-  else if (!statespace->isObservable(A, C))
+
+  if ((C.transpose() * C).rows() != Q.rows() || R.cols() != B.cols())
   {
-    printf("LQR::LQR State-Space model is NOT observable.\n");
+    printf("LQR::getControlInput Weight matricies is NOT compatible with state-space model.\n");
+    return controlInput.setZero(1, A.cols());
   }
-  else
-  {
-    this->computeHamiltonian(A, B);
-    this->computeRiccati(A, B, E);
-  }
+
+  this->computeHamiltonian(A, B);
+  this->computeRiccati(A, B, E);
 
   return controlInput;
 }

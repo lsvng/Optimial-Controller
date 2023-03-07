@@ -7,7 +7,6 @@
 
 #include <MPC.hpp>
 #include <Eigen/Dense>
-#include <iostream>
 
 using namespace Optimal_Controller;
 
@@ -32,19 +31,20 @@ MPC::~MPC()
 
 Eigen::MatrixXd MPC::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E, double dt)
 {
-  if (!statespace->isControllable(A, B))
+  if (!statespace->isControllable(A, B) || !statespace->isObservable(A, C))
   {
-    printf("LQR::LQR State-Space model is NOT controllable.\n");
+    printf("LQR::getControlInput State-Space model is NOT reliable.\n");
+    return controlInput.setZero(1, A.cols());
   }
-  else if (!statespace->isObservable(A, C))
+
+  if ((C.transpose() * C).rows() != Q.rows() || R.cols() != B.cols())
   {
-    printf("LQR::LQR State-Space model is NOT observable.\n");
+    printf("LQR::getControlInput Weight matricies is NOT compatible with state-space model.\n");
+    return controlInput.setZero(1, A.cols());
   }
-  else
-  {
-    this->discretization(A, B, dt);
-    this->computeRiccati(E, dt);
-  }
+
+  this->discretization(A, B, dt);
+  this->computeRiccati(E, dt);
 
   return controlInput;
 }
