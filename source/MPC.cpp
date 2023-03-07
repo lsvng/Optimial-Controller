@@ -11,13 +11,16 @@
 
 using namespace Optimal_Controller;
 
-MPC::MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, const double tolarance) 
+MPC::MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, const double tolarance, const int n) 
   : Q(Q)
   , R(R)
   , saturation(S)
   , tolarance(tolarance)
+  , N(n)
   , converged(false)
 {
+  statespace = new StateSpaceModel(N);
+
   Ad.setZero(Q.rows(), Q.cols());
   I.setIdentity(Q.rows(), Q.cols());
 }
@@ -29,8 +32,6 @@ MPC::~MPC()
 
 Eigen::MatrixXd MPC::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E, double dt)
 {
-  statespace = new StateSpaceModel(A.rows());
-
   if (!statespace->isControllable(A, B))
   {
     printf("LQR::LQR State-Space model is NOT controllable.\n");

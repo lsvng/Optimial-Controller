@@ -37,9 +37,10 @@ namespace Optimal_Controller
        * @param R Weight on control input
        * @param S Saturation
        * @param tolarance Tolarance
+       * @param n number of states
        * 
        */
-      MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, const double tolarance);
+      MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, const double tolarance, const int n);
       
       /**
        * @brief Destroy the MPC object
@@ -109,6 +110,7 @@ namespace Optimal_Controller
       
       double saturation;            // System saturation
       double tolarance;             // System tolarance
+      int N;                        // Number of states
       bool converged;               // Check system convergence in the S-plane
 
       StateSpaceModel* statespace;  // State Space Model object

@@ -63,7 +63,7 @@ int main()
     0.0, 0.0, 0.0,
     0.0, 0.0, 2.0;
 
-  auto ptr = std::make_unique<MPC>(Q, R, saturation, tolarance);
+  auto ptr = std::make_unique<MPC>(Q, R, saturation, tolarance, x);
 
   // Get state error.
   Eigen::MatrixXd E(x, x);

@@ -60,7 +60,7 @@ int main()
     0.0, 0.0, 2.0;
 
   // Initialize LQR controller and assign the MAT.
-  auto ptr = std::make_unique<LQR>(Q, R);
+  auto ptr = std::make_unique<LQR>(Q, R, x);
 
   // Get state error.
   Eigen::MatrixXd E(x, x);

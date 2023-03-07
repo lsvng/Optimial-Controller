@@ -22,8 +22,10 @@ class LQR
      * 
      * @param Q Weight on the systems state
      * @param R Weight on control input
+     * @param n number of states
+     * 
      */
-    LQR(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R);
+    LQR(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const int n);
 
     /**
      * @brief Destroy the LQR object
@@ -94,6 +96,7 @@ class LQR
     Eigen::MatrixXcd eigenVec;    // Eigenvectors
     Eigen::MatrixXd controlInput; // Control input
 
+    int N;                        // Number of states
     StateSpaceModel* statespace;  // State Space Model object
 };
 

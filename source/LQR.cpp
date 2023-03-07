@@ -10,10 +10,12 @@
 
 using namespace Optimal_Controller;
 
-LQR::LQR(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R)
+LQR::LQR(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const int n)
   : Q(Q)
   , R(R)
+  , N(n)
 {
+  statespace = new StateSpaceModel(N);
   P.setZero(Q.rows(), Q.cols());
 }
 
@@ -24,8 +26,6 @@ LQR::~LQR()
 
 Eigen::MatrixXd LQR::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E)
 {
-  statespace = new StateSpaceModel(A.rows());
-
   if (!statespace->isControllable(A, B))
   {
     printf("LQR::LQR State-Space model is NOT controllable.\n");
