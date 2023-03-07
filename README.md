@@ -11,7 +11,7 @@ Control theory often relies on the use of block diagrams, a diagrammatic represe
 ====
 This project contains C++ examples on the implementation of advanced controllers, designed for navigation applications. It leverages the Control Law Theory to generate a control action and uses the [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) to construct transfer functions that governs the system.
 
-The repository includes three popular and effective controllers:
+The repository includes four popular and effective controllers:
 
 - [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
 - [LQR Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator)
