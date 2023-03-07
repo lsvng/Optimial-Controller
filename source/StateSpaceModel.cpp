@@ -13,7 +13,7 @@ namespace Optimal_Controller
   StateSpaceModel::StateSpaceModel(uint8_t n)
     : n(n)
   {
-    mStateSpace.resize(n, n); // [B AB A^2B ... A^n-1B] || [C^T A^TC^T ... (A^T)^n-1C^T]
+    mStateSpace.setZero(n, n); // [B AB A^2B ... A^n-1B] || [C^T A^TC^T ... (A^T)^n-1C^T]
   }
 
   StateSpaceModel::~StateSpaceModel()
@@ -40,11 +40,14 @@ namespace Optimal_Controller
   {
     Eigen::MatrixPower<Eigen::MatrixXd> Apow(A);
 
-    for (int i = 0; i < n; i++)
+    if (A.cols() == MAT.rows())
     {
-      mStateSpace.col(i) = Apow(i) * MAT;
+      for (int i = 0; i < n; i++)
+      {
+        mStateSpace.col(i) = Apow(i) * MAT;
+      }
     }
 
-    return A.cols() == MAT.rows() ? mStateSpace.determinant() : 0;
+    return mStateSpace.determinant();
   }
 }
