@@ -72,7 +72,7 @@ int main()
   std::cout << "Control Input: " << ptr->getControlInput(A, B, C, E) << std::endl;
 
   /** !Output.
-   * @brief Control Input:   -0.0023         0 0.0162953         0
+   * @brief Control Input: -0.00115771           0  0.00141421
    * 
    */
 
