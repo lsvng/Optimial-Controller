@@ -11,10 +11,12 @@ Control theory often relies on the use of block diagrams, a diagrammatic represe
 ====
 This project includes C++ examples that demonstrate the implementation of advanced controllers. It utilizes Control Law Theory to generate control actions and leverages the [Eigen3 Library](https://eigen.tuxfamily.org/index.php?title=Main_Page) to construct transfer functions that govern the system and perform matrix operations.
 
-The repository includes five popular and effective controllers:
+This repository contains the following popular and effective controllers that have been extensively tested and proven to deliver outstanding performance:
 
 - [Fuzzy Logic Controller](https://en.wikipedia.org/wiki/Fuzzy_control_system)
 - [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
 - [LQR Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator)
 - [LQG Controller](https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic%E2%80%93Gaussian_control)
 - [MPC](https://en.wikipedia.org/wiki/Model_predictive_control)
+
+Each of these controllers has been selected for its unique features and capabilities, making them an ideal choice for a variety of applications.
