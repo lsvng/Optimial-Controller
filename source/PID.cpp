@@ -35,12 +35,12 @@ float PID::compute(const float setpoint, const float current_state, const float 
 
   // Compute state error
   proportional_error = setpoint - current_state;
-  integral    = (integral + proportional_error) * dt;
+  integral           = (integral + proportional_error) * dt;
   derivative_error   = (proportional_error - previous_error) / dt;
 
   // Compute PID
   proportional = kp * proportional_error;
-  integral           = ki * integral;
+  integral     = ki * integral;
   derivative   = kd * derivative_error;
 
   // Compute desired state

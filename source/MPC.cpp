@@ -33,13 +33,13 @@ Eigen::MatrixXd MPC::getControlInput(const Eigen::MatrixXd& A, const Eigen::Matr
 {
   if (!statespace->isControllable(A, B) || !statespace->isObservable(A, C))
   {
-    printf("LQR::getControlInput State-Space model is NOT reliable.\n");
+    printf("State-Space model is NOT reliable.\n");
     return controlInput.setZero(1, A.cols());
   }
 
   if ((C.transpose() * C).rows() != Q.rows() || R.cols() != B.cols())
   {
-    printf("LQR::getControlInput Weight matricies is NOT compatible with state-space model.\n");
+    printf("Weight matricies is NOT compatible with state-space model.\n");
     return controlInput.setZero(1, A.cols());
   }
 
