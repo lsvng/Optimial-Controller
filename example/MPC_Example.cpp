@@ -1,19 +1,20 @@
 /**
  * @file mpc.cpp
  * @brief !Valgrind output
- *  Memcheck, a memory error detector
- *  Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
- *  Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
- *  Command: ./src/control_system/control_system_mpc_example
- *  
- *  HEAP SUMMARY:
- *      in use at exit: 0 bytes in 0 blocks
- *    total heap usage: 19,575 allocs, 19,575 frees, 866,248 bytes allocated
- *  
- *  All heap blocks were freed -- no leaks are possible
- *  
- *  For lists of detected and suppressed errors, rerun with: -s
- *  ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ * Memcheck, a memory error detector
+ * Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+ * Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+ * Command: ./OPTIMAL_CONTROLLER_MPC
+ * 
+ * 
+ * HEAP SUMMARY:
+ *     in use at exit: 0 bytes in 0 blocks
+ *   total heap usage: 42,045 allocs, 42,045 frees, 1,202,720 bytes allocated
+ * 
+ * All heap blocks were freed -- no leaks are possible
+ * 
+ * For lists of detected and suppressed errors, rerun with: -s
+ * ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
  */
 
 #include <MPC.hpp>
@@ -62,7 +63,7 @@ int main()
     0.0, 0.0, 0.0,
     0.0, 0.0, 2.0;
 
-  auto ptr = std::unique_ptr<MPC>(new MPC(Q, R, saturation, tolarance));
+  auto ptr = std::make_unique<MPC>(Q, R, saturation, tolarance);
 
   // Get state error.
   Eigen::MatrixXd E(x, x);
