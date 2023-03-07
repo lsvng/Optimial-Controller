@@ -24,6 +24,7 @@ MPC::MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, con
 
 MPC::~MPC()
 {
+  delete statespace;
 }
 
 Eigen::MatrixXd MPC::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E, double dt)
