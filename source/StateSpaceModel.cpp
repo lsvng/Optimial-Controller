@@ -39,12 +39,12 @@ namespace Optimal_Controller
   double StateSpaceModel::computeDeterminant(const Eigen::MatrixXd& A, const Eigen::MatrixXd& MAT)
   {
     Eigen::MatrixPower<Eigen::MatrixXd> Apow(A);
-    
+
     for (int i = 0; i < n; i++)
     {
       mStateSpace.col(i) = Apow(i) * MAT;
     }
 
-    return mStateSpace.determinant();
+    return A.cols() == MAT.rows() ? mStateSpace.determinant() : 0;
   }
 }
