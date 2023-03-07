@@ -20,20 +20,31 @@ MPC::MPC(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const double S, con
 {
   Ad.setZero(Q.rows(), Q.cols());
   I.setIdentity(Q.rows(), Q.cols());
-  cmd_vel.setZero(1, R.rows()); // [translation rate, rotation rate]
 }
 
 MPC::~MPC()
 {
 }
 
-Eigen::MatrixXd MPC::getVelocity(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& E, double dt)
+Eigen::MatrixXd MPC::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E, double dt)
 {
-  this->discretization(A, B, dt);
-  this->computeRiccati(E, dt);
-  this->computeVelocity();
+  statespace = new StateSpaceModel(A.rows());
 
-  return cmd_vel;
+  if (!statespace->isControllable(A, B))
+  {
+    printf("LQR::LQR State-Space model is NOT controllable.\n");
+  }
+  else if (!statespace->isObservable(A, C))
+  {
+    printf("LQR::LQR State-Space model is NOT observable.\n");
+  }
+  else
+  {
+    this->discretization(A, B, dt);
+    this->computeRiccati(E, dt);
+  }
+
+  return controlInput;
 }
 
 void MPC::discretization(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, double dt)
@@ -67,26 +78,4 @@ void MPC::computeRiccati(const Eigen::MatrixXd& E, double dt)
 
     K = (R + Bd.transpose() * P * Bd).inverse() * Bd.transpose() * P * Ad;
     controlInput = K * E;
-}
-
-void MPC::computeVelocity()
-{
-  if (converged)
-  {    
-    // Compute magnitude of velocity vector
-    cmd_vel << 
-      sqrt(pow(controlInput(0, 0), 2.0) + pow(controlInput(0, 1), 2.0) + pow(controlInput(0, 2), 2.0)),
-      sqrt(pow(controlInput(1, 0), 2.0) + pow(controlInput(1, 1), 2.0) + pow(controlInput(1, 2), 2.0));
-
-    // Saturate output signal
-    if(cmd_vel(0, 0) > saturation) cmd_vel(0, 0)  = saturation;
-    if(cmd_vel(0, 0) < -saturation) cmd_vel(0, 0) = -saturation;
-    if(cmd_vel(0, 1) > saturation) cmd_vel(0, 1)  = saturation;
-    if(cmd_vel(0, 1) < -saturation) cmd_vel(0, 1) = -saturation;
-  }
-  else
-  {
-    std::cout << "MPC controller did not converge. Resetting cmd_vel..." << std::endl;
-    cmd_vel.setZero();
-  }
 }

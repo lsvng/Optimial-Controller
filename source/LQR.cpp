@@ -10,24 +10,37 @@
 
 using namespace Optimal_Controller;
 
-LQR::LQR(
-    const Eigen::MatrixXd& Q, 
-    const Eigen::MatrixXd& R
-    ):
-    Q(Q),
-    R(R)
+LQR::LQR(const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R)
+  : Q(Q)
+  , R(R)
 {
-    P.setZero(Q.rows(), Q.cols());
-    cmd_vel.setZero(1, R.rows()); // [translation rate, rotation rate]
+  P.setZero(Q.rows(), Q.cols());
 }
 
-Eigen::MatrixXd LQR::getVelocity(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& E)
+LQR::~LQR()
 {
-  this->computeHamiltonian(A, B);
-  this->computeRiccati(A, B, E);
-  this->computeVelocity(A, B, E);
+  delete statespace;
+}
 
-  return cmd_vel;
+Eigen::MatrixXd LQR::getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E)
+{
+  statespace = new StateSpaceModel(A.rows());
+
+  if (!statespace->isControllable(A, B))
+  {
+    printf("LQR::LQR State-Space model is NOT controllable.\n");
+  }
+  else if (!statespace->isObservable(A, C))
+  {
+    printf("LQR::LQR State-Space model is NOT observable.\n");
+  }
+  else
+  {
+    this->computeHamiltonian(A, B);
+    this->computeRiccati(A, B, E);
+  }
+
+  return controlInput;
 }
 
 void LQR::computeHamiltonian(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B)
@@ -68,11 +81,4 @@ void LQR::computeRiccati(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, con
   // Update LQR gain.
   K = R.inverse() * B.transpose() * P;
   controlInput = K * E;
-}
-
-void LQR::computeVelocity(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& E)
-{
-  cmd_vel << 
-    sqrt(pow(controlInput(0, 0), 2.0) + pow(controlInput(0, 1), 2.0) + pow(controlInput(0, 2), 2.0)),
-    sqrt(pow(controlInput(1, 0), 2.0) + pow(controlInput(1, 1), 2.0) + pow(controlInput(1, 2), 2.0));
 }

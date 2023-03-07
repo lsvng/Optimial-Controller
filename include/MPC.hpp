@@ -9,6 +9,7 @@
 #define MPC_HPP
 
 #include <Eigen/Dense>
+#include <StateSpaceModel.hpp>
 
 namespace Optimal_Controller
 {
@@ -61,15 +62,16 @@ namespace Optimal_Controller
       void operator=(MPC& iMPC) = delete;
 
       /**
-       * @brief Get the Velocity object
+       * @brief Get the Control Input
        * 
        * @param A System dynamics matrix
        * @param B Input matrix
+       * @param B Output matrix
        * @param E State error
        * @param dt Delta time
        * @return Eigen::MatrixXd 
        */
-      Eigen::MatrixXd getVelocity(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& E, double dt);
+      Eigen::MatrixXd getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E, double dt);
 
     private:
       /**
@@ -103,12 +105,13 @@ namespace Optimal_Controller
       Eigen::MatrixXd P;            // Riccati matrix
       Eigen::MatrixXd Ad;           // Discretized system dynamics matrix
       Eigen::MatrixXd Bd;           // Discretized input matrix
-      Eigen::MatrixXd cmd_vel;      // Command velocity
       Eigen::MatrixXd controlInput; // Control input
       
       double saturation;            // System saturation
       double tolarance;             // System tolarance
       bool converged;               // Check system convergence in the S-plane
+
+      StateSpaceModel* statespace;  // State Space Model object
   };
 
 } // namespace controller

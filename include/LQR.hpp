@@ -9,6 +9,7 @@
 #define LQR_HPP
 
 #include <Eigen/Dense>
+#include <StateSpaceModel.hpp>
 
 namespace Optimal_Controller
 {
@@ -28,7 +29,7 @@ class LQR
      * @brief Destroy the LQR object
      * 
      */
-    ~LQR() {};
+    ~LQR();
 
     /**
      * @brief Disable copy constructor
@@ -45,14 +46,15 @@ class LQR
     void operator=(LQR& iLQR) = delete;
 
     /**
-     * @brief Get the command velocity
+     * @brief Get the control input
      * 
      * @param A System dynamics matrix
      * @param B Input matrix
+     * @param C Output matrix
      * @param E State error
      * @return Eigen::MatrixXd 
      */
-    Eigen::MatrixXd getVelocity(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& E);
+    Eigen::MatrixXd getControlInput(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C, const Eigen::MatrixXd& E);
 
   private:
     /**
@@ -90,8 +92,9 @@ class LQR
     Eigen::MatrixXd I;            // Identity matrix
     Eigen::MatrixXd P;            // Riccati matrix
     Eigen::MatrixXcd eigenVec;    // Eigenvectors
-    Eigen::MatrixXd cmd_vel;      // Command velocity
     Eigen::MatrixXd controlInput; // Control input
+
+    StateSpaceModel* statespace;  // State Space Model object
 };
 
 } // namespace controller
