@@ -1,5 +1,5 @@
 /**
- * @file LQR.cpp
+ * @file LQG.cpp
  * @brief !Valgrind output
  * Memcheck, a memory error detector
  * Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
